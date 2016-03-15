@@ -28,11 +28,10 @@ public class NewObjectValueProposalProviderTest extends	AbstractEFactoryContentA
 	}
 
 	@Test
-	public void testProposeRootClassNames() throws Exception {
+	public void testRootClassNames() throws Exception {
 		newBuilder().append("use testmodel.*\n").assertText("@Name", "Abstract", "AttributeSample",
 				"AttributeTestContainer", "Child", "CustomName", "DefaultName", "Interface", "NameAttributeContainer",
 				"NestedElement", "NestedElements", "NoName", "ReferenceTarget", "ReferenceTargetSubclass",
-				"ReferenceTestContainer", "SingleOptional", "SingleRequired", "TestInnerModel",
-				/*"TestInnerModelInPackageWithTraditionalURI", */"TestModel", "use");
+				"ReferenceTestContainer", "SingleOptional", "SingleRequired", "TestModel", "use");
 	}
 }

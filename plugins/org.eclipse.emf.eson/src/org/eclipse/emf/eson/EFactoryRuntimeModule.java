@@ -22,15 +22,15 @@ import org.eclipse.emf.eson.resource.EFactoryLocationInFileProvider;
 import org.eclipse.emf.eson.resource.EFactoryResourceFactory;
 import org.eclipse.emf.eson.resource.EFactoryResourceServiceProvider;
 import org.eclipse.emf.eson.scoping.EFactoryQualifiedNameProvider;
-import org.eclipse.emf.eson.scoping.EPackageScopeProvider;
+import org.eclipse.emf.eson.scoping.ESONLinkingService;
 import org.eclipse.emf.eson.scoping.ExtendedImportedNamespaceAwareLocalScopeProvider;
-import org.eclipse.emf.eson.scoping.IEPackageScopeProvider;
 import org.eclipse.emf.eson.scoping.WarningErrorHandlerWithoutNoSuchMethodException;
 import org.eclipse.emf.eson.validation.ESONDiagnosticConverter;
 import org.eclipse.emf.eson.validation.ESONLinkingDiagnosticMessageProvider;
 import org.eclipse.emf.eson.xtextbackpatch.FasterResourceSetBasedAllContainersStateProvider;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
+import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
@@ -99,10 +99,6 @@ public class EFactoryRuntimeModule extends AbstractEFactoryRuntimeModule {
 		return EFactoryLocationInFileProvider.class;
 	}
 	
-	public Class<? extends IEPackageScopeProvider> bindIEPackageScopeProvider() {
-		return EPackageScopeProvider.class;
-	}
-
 	public Class<? extends org.eclipse.xtext.resource.IResourceDescription.Manager> bindIResourceDescription$Manager() {
 		return org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager.class;
 	}
@@ -132,6 +128,11 @@ public class EFactoryRuntimeModule extends AbstractEFactoryRuntimeModule {
 	@Override
 	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(ExtendedImportedNamespaceAwareLocalScopeProvider.class);
+	}
+	
+	@Override
+	public Class<? extends ILinkingService> bindILinkingService() {
+		return ESONLinkingService.class;
 	}
 	
 	@Override

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.eson.eFactory.Containment;
 import org.eclipse.emf.eson.eFactory.Feature;
 import org.eclipse.emf.eson.eFactory.MultiValue;
@@ -266,4 +267,18 @@ public class EFactoryProposalProvider extends AbstractEFactoryProposalProvider {
 		return false;
 	}
 
+	/**
+	 * For the EPackage nsURI in the "use" the default super getDisplayString()
+	 * displays something weired because URI get chopped up as QualifiedName
+	 * when they should better just be shown as-is.
+	 */
+	@Override
+	protected String getDisplayString(EObject element, String qualifiedNameAsString, String shortName) {
+		if (!element.eClass().equals(EcorePackage.Literals.EPACKAGE)) {
+			return super.getDisplayString(element, qualifiedNameAsString, shortName);
+		} else {
+			return qualifiedNameAsString;
+		}
+	}
+	
 }
