@@ -30,7 +30,6 @@ import org.eclipse.emf.common.ui.viewer.ColumnViewerInformationControlToolTipSup
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.presentation.EcoreEditorPlugin;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -195,7 +194,14 @@ public class EFactoryWithTreeEditor extends XtextEditor implements IEditingDomai
 			}
 		};
 		resourceSet.eAdapters().add(new EditingDomainProvider());
-		resourceSet.getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap(true));
+		
+		// PERFORMANCE: EcorePlugin.computePlatformURIMap has been found via
+		// Profiler to be relatively expensive, and cause a noticeable/
+		// significant delay during first-time start-up of the ESON Editor. As
+		// this is probably not critical, don't do this (after all both tests
+		// and the pure Xtext/DSL only/no tree editor do not do this either).
+		//
+		// resourceSet.getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap(true));
 	}
 
 	protected void updateTreeView(final URI uri, final boolean ignoreSelection) {
