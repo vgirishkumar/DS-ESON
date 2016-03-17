@@ -116,19 +116,18 @@ public class EFactoryProposalProvider extends AbstractEFactoryProposalProvider {
 
 	@Override
 	public void completeNewObject_EClass(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		// NOOP override, to prevent default implementation from kicking in
-		// for first model arg for anything else than NewObject. 
-		// We want ours, below, only.
+		super.completeNewObject_EClass(model, assignment, context, acceptor);
 	}
 	public void completeNewObject_EClass(MultiValue multiValue, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		super.completeNewObject_EClass(multiValue, assignment, context, acceptor);
 	}
 	public void completeNewObject_EClass(Feature feature, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// TODO needed? If yes, create missing non-reg. test!! if (EcoreUtil3.isEContainment(feature.getEFeature())) {
-		if (!feature.getEFeature().isMany())
+		if (!feature.getEFeature().isMany()) {
 			// This is needed to avoid EClass proposal BEFORE the [ in a MultiValue
 			// The one INSIDE the [] is offered below by completeMultiValue_Values
 			super.completeNewObject_EClass(feature, assignment, context, acceptor);
+		}
 	}
 	
 	@Override

@@ -83,6 +83,12 @@ public class EFactoryScopeProviderNG extends AbstractDeclarativeScopeProvider {
 
 	public IScope scope_EClass(EObject context, EReference reference) {
 		IScope scope = delegateGetScope(context, reference);
+		scope = new FilteringScope(scope, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription desc) {
+				// @see org.eclipse.xtext.ecore.EcoreResourceDescriptionStrategy
+				return !"true".equals(desc.getUserData("nsURI"));
+			}
+		});
 		return new DottedQualifiedNameAwareScope(scope, isIgnoreCase(reference));
 	}
 
