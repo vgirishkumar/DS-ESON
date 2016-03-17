@@ -28,7 +28,6 @@ import org.eclipse.emf.eson.ui.internal.EFactoryActivator;
 import org.eclipse.emf.eson.util.EPackageRegistry;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jface.dialogs.IDialogPage;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
@@ -58,14 +57,11 @@ public class EFactoryNewFileWizardPage extends WizardPage {
 
 	public EFactoryNewFileWizardPage(ISelection selection) {
 		super("wizardPage");
-		setTitle("EFactory File");
-		setDescription("This wizard creates a new file with *.efactory extension.");
+		setTitle("ESON Model Resource File");
+		setDescription("This wizard creates a new *.eson file.");
 		this.selection = selection;
 	}
 
-	/**
-	 * @see IDialogPage#createControl(Composite)
-	 */
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
 		GridLayout layout = new GridLayout();
@@ -129,7 +125,6 @@ public class EFactoryNewFileWizardPage extends WizardPage {
 	/**
 	 * Tests if the current workbench selection is a suitable container to use.
 	 */
-
 	private void initialize() {
 		if (selection != null && selection.isEmpty() == false
 				&& selection instanceof IStructuredSelection) {
@@ -148,7 +143,7 @@ public class EFactoryNewFileWizardPage extends WizardPage {
 				}
 			}
 		}
-		fileText.setText("model.efactory");
+		fileText.setText("example.eson");
 	}
 
 	private void setContainerText(IResource resource) {
@@ -168,7 +163,7 @@ public class EFactoryNewFileWizardPage extends WizardPage {
 
 	private void initPackageUri(IFile file) {
 		String fileExtension = file.getFileExtension().toLowerCase();
-		if (fileExtension.equals("ecore") || fileExtension.equals("efactory")) {
+		if (fileExtension.equals("eson")) {
 			Resource resource = loadResource(file);
 			if (resource != null && !resource.getContents().isEmpty()) {
 				initPackageUri(resource.getContents().get(0));
@@ -193,15 +188,13 @@ public class EFactoryNewFileWizardPage extends WizardPage {
 
 	private Resource loadResource(IFile file) {
 		ResourceSet rs = new ResourceSetImpl();
-		return rs.getResource(URI.createPlatformResourceURI(file.getFullPath()
-				.toString(), true), true);
+		return rs.getResource(URI.createPlatformResourceURI(file.getFullPath().toString(), true), true);
 	}
 
 	/**
 	 * Uses the standard container selection dialog to choose the new value for
 	 * the container field.
 	 */
-
 	private void handleBrowse() {
 		ContainerSelectionDialog dialog = new ContainerSelectionDialog(
 				getShell(), ResourcesPlugin.getWorkspace().getRoot(), false,
@@ -248,8 +241,8 @@ public class EFactoryNewFileWizardPage extends WizardPage {
 		int dotLoc = fileName.lastIndexOf('.');
 		if (dotLoc != -1) {
 			String ext = fileName.substring(dotLoc + 1);
-			if (ext.equalsIgnoreCase("efactory") == false) {
-				updateStatus("File extension must be \"efactory\"");
+			if (ext.equalsIgnoreCase("eson") == false) {
+				updateStatus("File extension must be \"eson\"");
 				return;
 			}
 		}

@@ -443,7 +443,14 @@
              class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
              icon="icons/EObject.gif"
              id="org.eclipse.emf.eson.ui.wizard.NewLibraryExampleWizard"
-             name="ESON Library Example">
+             name="ESON Library Example"
+             project="true">
+       </wizard>
+       <wizard
+             class="org.eclipse.emf.eson.ui.wizard.EFactoryNewFileWizard"
+             icon="icons/EObject.gif"
+             id="org.eclipse.emf.eson.ui.wizard.EFactoryNewFileWizard"
+             name="New ESON File">
        </wizard>
     </extension>
    <extension point="org.eclipse.emf.common.ui.examples">

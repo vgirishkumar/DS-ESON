@@ -56,7 +56,6 @@ public class EFactoryNewFileWizard extends Wizard implements INewWizard {
 	/**
 	 * Adding the page to the wizard.
 	 */
-
 	@Override
 	public void addPages() {
 		page = new EFactoryNewFileWizardPage(selection);
