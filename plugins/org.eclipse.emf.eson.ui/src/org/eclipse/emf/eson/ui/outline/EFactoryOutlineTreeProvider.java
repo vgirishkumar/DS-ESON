@@ -31,6 +31,10 @@ import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 /**
  * Outline.
  * 
+ * This is used (only) for the "inline" Quick Outline (the Ctrl-O one). The
+ * read-only Outline view is, intentionally, disabled, to avoid end-user
+ * confusion with the right-hand side read/write Outline in the Editor.
+ * 
  * @author Michael Vorburger
  */
 public class EFactoryOutlineTreeProvider extends DefaultOutlineTreeProvider implements IOutlineTreeProvider.ModeAware {

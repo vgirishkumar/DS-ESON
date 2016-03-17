@@ -16,19 +16,18 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
+import org.eclipse.emf.eson.EFactoryUiInjectorProvider;
+import org.eclipse.emf.eson.ui.outline.EFactoryOutlineTreeProvider;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.inject.Injector;
-import org.eclipse.emf.eson.EFactoryUiInjectorProvider;
-import org.eclipse.emf.eson.ui.outline.EFactoryOutlineTreeProvider;
 
 /**
  * Test for the EFactoryOutlineTreeProvider.
@@ -52,19 +51,14 @@ public class EFactoryOutlineTreeProviderTest extends AbstractXtextTests {
 		disableSerializerTest();
 	}
 
-	// TODO write another testSimpleOutline(), for a "normal" *.efactory on testmodel, not ecore.
-	
-	/**
-	 * Disabled, as long as DynamicEmfTest doesn't work anymore.
-	 */
-	@Ignore
 	@Test
-	public void testEcoreOutline() throws Exception {
-		String text = readFileIntoString("/BuilderTests/Entity.efactory");
+	public void testOutline() throws Exception {
+		String text = readFileIntoString("/FormatterTests/FormatterTest.efactory");
 		IOutlineNode root = getOutlineRootNode(text);
-		assertNodeText(root, "entity", 5);
-		assertNodeTextRegion(root, text, "entity", 6, 123456789);
-		assertNodeText(root.getChildren().get(0), "Type", 1);
+		assertNodeText(root, "TestModel testModelName", 4);
+		assertNodeTextRegion(root, text, "testModelName", 1438, 13);
+		assertNodeText(root.getChildren().get(0), "SingleRequired ", 0);
+		// TODO more
 	}
 
 	protected void assertNodeText(IOutlineNode node, String expectedNodeText, int numChildren) {
@@ -72,10 +66,11 @@ public class EFactoryOutlineTreeProviderTest extends AbstractXtextTests {
 		assertEquals(expectedNodeText, node.getText().toString());
 	}
 	
-	protected void assertNodeTextRegion(IOutlineNode node, String fullModelText, String keyword, int fullLenght, int significantLength) {
+	protected void assertNodeTextRegion(IOutlineNode node, String fullModelText, String keyword, int fullLength, int significantLength) {
 		int index = fullModelText.indexOf(keyword);
-		assertEquals(index, node.getFullTextRegion().getOffset());
-		assertEquals(fullLenght, node.getFullTextRegion().getLength());
+		assertTrue("keyword not found: " + keyword + "; fullModelText: " + fullModelText, index > -1);
+		assertEquals(fullLength, node.getFullTextRegion().getLength());
+		// ? assertEquals(index, node.getFullTextRegion().getOffset());
 		assertEquals(index, node.getSignificantTextRegion().getOffset());
 		assertEquals(significantLength, node.getSignificantTextRegion().getLength());		
 	}
