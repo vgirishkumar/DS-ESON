@@ -162,6 +162,12 @@ public class EFactoryJavaValidatorTest {
 			);
 	}
 	
+	@Test
+	public void testCannotHaveNameAttributeWithinNamedNewObject() throws Exception {
+		EObject testModel = parseHelper.parse("use testmodel.* TestModel abc { name: \"def\" singleRequired: SingleRequired { } }");
+		tester.validate(testModel).assertDiagnosticsCount(1).assertError(EFactoryJavaValidator.ERR_CANNOT_HAVE_ANOTHER_NAME);
+	}
+	
 	protected AssertableDiagnostics dump(AssertableDiagnostics diag) {
 		Iterable<Diagnostic> all = diag.getAllDiagnostics();
 		for (Diagnostic diagnostic : all) {

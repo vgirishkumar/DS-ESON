@@ -69,6 +69,7 @@ public class EFactoryJavaValidator extends AbstractEFactoryJavaValidator {
 	
 	public static final String ERR_CANNOT_NAME = "cannotname";
 	public static final String ERR_BAD_TYPE = "badtype";
+	public static final String ERR_CANNOT_HAVE_ANOTHER_NAME = "only1name";
 
 	// NOTE: There are a lot of possible NullPointerException in here in the
 	// scenario where some reference types are still proxies.. but the NPEs get
@@ -252,11 +253,19 @@ public class EFactoryJavaValidator extends AbstractEFactoryJavaValidator {
 			// https://github.com/vorburger/efactory/pull/18
 			error("Name cannot be blank", EFactoryPackage.Literals.NEW_OBJECT__NAME);			
 		}
-		EAttribute nameAttribute = nameAccessor.getNameAttribute(newObject);
 		
+		EAttribute nameAttribute = nameAccessor.getNameAttribute(newObject);
 		Optional<EClass> eClassOptional = newObjectExtensions.getDeclaredOrInferredEClass(newObject);
 		if (eClassOptional.isPresent() && nameAttribute == null)
 			error("Cannot name " + eClassOptional.get().getName(), EFactoryPackage.Literals.NEW_OBJECT__NAME, ERR_CANNOT_NAME);
+		if (eClassOptional.isPresent() && nameAttribute != null) {
+			for (Feature feature : newObject.getFeatures()) {
+				if (nameAttribute.equals(feature.getEFeature())) {
+					error("Cannot name again, it's already set to: " + name, feature, 
+							EFactoryPackage.Literals.FEATURE__VALUE, ERR_CANNOT_HAVE_ANOTHER_NAME);
+				}
+			}
+		}
 	}
 
 	private void checkIsInstantiatable(NewObject newObject) {
