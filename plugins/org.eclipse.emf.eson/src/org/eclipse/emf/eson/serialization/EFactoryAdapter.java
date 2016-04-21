@@ -222,7 +222,7 @@ public class EFactoryAdapter extends EContentAdapter {
 
 	protected void addManyListValues(Feature factoryFeature, final Notification msg, Resource resource) {
 		MultiValue multiValue = (MultiValue) factoryFeature.getValue();
-		if(multiValue == null){
+		if(multiValue == null) {
 			multiValue = EFactoryFactory.eINSTANCE.createMultiValue();
 			factoryFeature.setValue(multiValue);
 		}
@@ -241,9 +241,14 @@ public class EFactoryAdapter extends EContentAdapter {
 
 	protected void removeManyListValues(Feature factoryFeature, final Notification msg, Resource resource) {
 		MultiValue multiValue = (MultiValue) factoryFeature.getValue();
-		int[] indexesToRemove = (int[]) msg.getNewValue();
-		EList<Value> values = multiValue.getValues();
-		listRemoveIndexes(values, indexesToRemove);
+		if(multiValue != null) {
+			EList<Value> values = multiValue.getValues();
+			int[] indexesToRemove = (int[]) msg.getNewValue();
+			if(indexesToRemove !=null)
+				listRemoveIndexes(values, indexesToRemove);
+			else
+				values.clear();
+		}
 	}
 
 	/**

@@ -20,6 +20,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -335,6 +336,28 @@ public class BuilderResyncTest {
 		assertEquals(1, getMultiValueValues(eFactory, 2).size());
 		checkListFeature(eFactory, 2, 0, 3487);
 		checkNodes(eFactory);
+	}
+	
+	@Test // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=492080
+	public void testSetManyAttribute() throws Exception {
+	    // Load the Test Model
+	    EList<EObject> resourceContents = rp.get().load("res/BuilderResyncTests/TestModelAddManyAttribute.eson", true);
+	    // Get the Test Model for edit
+	    TestModel testModel = (TestModel) resourceContents.get(1);
+	    AttributeTestContainer attributeTestContainer = testModel.getAttributeTest().get(0);
+	    
+        // create a List of EAttribute/s, in this case manyInts
+	    List<Integer> ints = new ArrayList<>();
+        ints.add(1);
+        ints.add(2);
+        // Now set the same here using EMF EAttribute Reference..
+        // NOTE: Property Sheet always does the eSET, instead of distinguishing add, remove or any
+	    attributeTestContainer.eSet(TestmodelPackage.eINSTANCE.getAttributeTestContainer_ManyInt(), ints);
+	    
+	    EList<Integer> manyInt = attributeTestContainer.getManyInt();
+	    assertEquals(2, manyInt.size());
+	    assertTrue(manyInt.contains(1));
+	    assertTrue(manyInt.contains(2));
 	}
 
 	protected void checkListFeature(Factory eFactory, int featureIndex, int multiValueIndex, int expectedInt) {
