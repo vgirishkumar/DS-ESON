@@ -19,6 +19,7 @@ import org.eclipse.emf.eson.tests.util.tests.ESONWithTestmodelInjectorProviderTe
 import com.google.inject.Injector;
 
 import testmodel.TestmodelPackage;
+import testmodel.testsubmodel.TestsubmodelPackage;
 
 /**
  * IInjectorProvider for ESON + TestmodelPackage.
@@ -46,6 +47,8 @@ public class ESONWithTestmodelInjectorProvider extends EFactoryInjectorProvider 
 	    // 2. EcoreUtil3Test, 3. SimplestTest (in this exact order!), and you'll see.
         if (!EPackage.Registry.INSTANCE.containsKey(TestmodelPackage.eNS_URI))
             EPackage.Registry.INSTANCE.put(TestmodelPackage.eNS_URI, TestmodelPackage.eINSTANCE);
+        if (!EPackage.Registry.INSTANCE.containsKey(TestsubmodelPackage.eNS_URI))
+            EPackage.Registry.INSTANCE.put(TestsubmodelPackage.eNS_URI, TestsubmodelPackage.eINSTANCE);
 
 		// NORMALLY TestmodelPackage.eINSTANCE.getTestModel(); // NOT TestmodelPackageImpl.init();
 	    //  ^^^^^ but this doesn't really work reliably, so needs above
