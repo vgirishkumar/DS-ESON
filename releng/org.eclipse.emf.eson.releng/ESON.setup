@@ -25,6 +25,11 @@
       value="2048m"
       vm="true"/>
   <setupTask
+      xsi:type="setup:EclipseIniTask"
+      option="-Doomph.redirection.eson"
+      value="=https://git.eclipse.org/c/emf/org.eclipse.emf.eson.git/plain/->${eson.git.clone.location|uri}/"
+      vm="true"/>
+  <setupTask
       xsi:type="setup:PreferenceTask"
       key="instance/org.eclipse.jdt.launching/org.eclipse.jdt.launching.PREF_STRICTLY_COMPATIBLE_JRE_NOT_AVAILABLE"
       value="ignore"/>
@@ -372,8 +377,6 @@
       <requirement
           name="org.eclipse.xtend.sdk.feature.group"
           versionRange="[2.8.0,2.9.0)"/>
-      <requirement
-          name="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
       <repository
           url="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.4/"/>
     </setupTask>
