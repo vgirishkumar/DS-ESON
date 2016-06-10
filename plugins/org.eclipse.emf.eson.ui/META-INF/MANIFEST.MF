@@ -33,6 +33,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.emf.eson.ui,
  org.eclipse.emf.eson.ui.contentassist,
  org.eclipse.emf.eson.ui.contentassist.antlr,
+ org.eclipse.emf.eson.ui.editor.tree,
  org.eclipse.emf.eson.ui.internal,
  org.eclipse.emf.eson.ui.labeling,
  org.eclipse.emf.eson.ui.outline,

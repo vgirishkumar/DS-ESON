@@ -451,5 +451,17 @@ public class BuilderResyncTest {
 		// NodeFixer may have caused by throwing exceptions.
 		// System.out.println(text);
 	}
+	
+	@Test
+	public void testAssociateFileExtension() throws Exception {
+	    EList<EObject> resourceContents = rp.get().load("res/BuilderResyncTests/1TestModelWithNameProperty.testmodel", true);
+	    assertTrue(resourceContents != null);
+	    assertTrue(!resourceContents.isEmpty());
+	    
+	    //with different extension than above, this is a proof that extensions with comma seperated values work
+        resourceContents = rp.get().load("res/BuilderResyncTests/1TestModelWithNameProperty.tm", true);
+        assertTrue(resourceContents != null);
+        assertTrue(!resourceContents.isEmpty());	    
+	}
 
 }
