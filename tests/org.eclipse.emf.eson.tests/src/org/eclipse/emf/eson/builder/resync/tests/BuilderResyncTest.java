@@ -51,8 +51,6 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.google.inject.Provider;
-
 import testmodel.AttributeSample;
 import testmodel.AttributeTestContainer;
 import testmodel.NameAttributeContainer;
@@ -61,6 +59,8 @@ import testmodel.SingleRequired;
 import testmodel.TestModel;
 import testmodel.TestmodelFactory;
 import testmodel.TestmodelPackage;
+
+import com.google.inject.Provider;
 
 /**
  * Tests EFactoryAdapter's "re-sychronization" of changes to the derived "real"
@@ -433,6 +433,40 @@ public class BuilderResyncTest {
 		// because it detects inconsistencies in the Node model which the
 		// NodeFixer may have caused by throwing exceptions.
 		// System.out.println(text);
+	}
+	
+	@Test
+	public void testAssociateFileExtension() throws Exception {
+	    EList<EObject> resourceContents = rp.get().load("res/BuilderResyncTests/1TestModelWithNameProperty.testmodel", true);
+	    
+	 // Change the TestModel
+        TestModel testModel = (TestModel) resourceContents.get(1);
+        AttributeTestContainer attributeTestContainer = TestmodelFactory.eINSTANCE.createAttributeTestContainer();
+        attributeTestContainer.setOneEnum(SampleEnum.SAMPLE2);
+        attributeTestContainer.getManyEnums().add(SampleEnum.SAMPLE);
+        testModel.getAttributeTest().add(attributeTestContainer);
+
+        // Check the EFactory model
+        Factory eFactory = (Factory) resourceContents.get(0);
+        NewObject newObject = checkNewObjectAttributeTestContainer(eFactory, 2, 0);
+        EnumAttribute oneEnum = (EnumAttribute)newObject.getFeatures().get(3).getValue();
+        assertEquals(SampleEnum.SAMPLE2.getName(), oneEnum.getValue().getName());
+        
+        EList<Value> manyEnums = getMultiValueValues(newObject.getFeatures().get(5));
+        assertEquals(1, manyEnums.size());
+        EnumAttribute firstOfManyEnums = (EnumAttribute)manyEnums.get(0);
+        assertEquals(SampleEnum.SAMPLE.getName(), firstOfManyEnums.getValue().getName());
+        
+        // change TestModel by adding one more enum to list
+        attributeTestContainer.getManyEnums().add(SampleEnum.SAMPLE2);
+        // check it again
+        manyEnums = getMultiValueValues(newObject.getFeatures().get(5));
+        assertEquals(2, manyEnums.size());
+        EnumAttribute secondOfManyEnums = (EnumAttribute)manyEnums.get(1);
+        assertEquals(SampleEnum.SAMPLE2.getName(), secondOfManyEnums.getValue().getName());
+        firstOfManyEnums = (EnumAttribute)manyEnums.get(0);
+        assertEquals(SampleEnum.SAMPLE.getName(), firstOfManyEnums.getValue().getName());
+        checkNodes(eFactory);
 	}
 
 }

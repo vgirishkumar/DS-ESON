@@ -35,5 +35,11 @@
             class="org.eclipse.emf.eson.generators.tests.TestGenerator">
       </generator>
    </extension>
+   <extension
+         point="org.eclipse.emf.eson.associatetype">
+      <AssociateFileExtension
+            fileextension="testmodel">
+      </AssociateFileExtension>
+   </extension>
 
 </plugin>
