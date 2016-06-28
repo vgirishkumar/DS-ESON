@@ -10,10 +10,14 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.emf.ecore.xcore.lib,
+ org.eclipse.emf.eson.example.xcore;visibility:=reexport,
  org.eclipse.xtext.generator,
  org.eclipse.emf.eson
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.eclipse.emf.eson.example.library,
  org.eclipse.emf.eson.example.library.impl,
- org.eclipse.emf.eson.example.library.util
+ org.eclipse.emf.eson.example.library.util,
+ org.eclipse.emf.eson.example.library.subpackage,
+ org.eclipse.emf.eson.example.library.subpackage.impl,
+ org.eclipse.emf.eson.example.library.subpackage.util

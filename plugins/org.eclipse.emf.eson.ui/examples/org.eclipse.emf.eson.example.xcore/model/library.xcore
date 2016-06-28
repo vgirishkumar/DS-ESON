@@ -15,6 +15,7 @@ class Book {
 	BookCategory category
 	refers Writer author
 	refers Book[] sequels
+	contains org.eclipse.emf.eson.example.library.subpackage.Details[] details
 }
 
 class Writer {

@@ -20,4 +20,12 @@
       </generator>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated sub-library -->
+      <package
+            uri="org.eclipse.emf.eson.example.library.subpackage"
+            class="org.eclipse.emf.eson.example.library.subpackage.SubpackagePackage"
+            genModel="model/sub-library.xcore"/>
+   </extension>
+
 </plugin>
