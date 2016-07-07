@@ -236,7 +236,12 @@ public class EFactoryAdapter extends EContentAdapter {
 	protected void removeListValue(Feature factoryFeature, final Notification msg, Resource resource) {
 		MultiValue multiValue = (MultiValue) factoryFeature.getValue();
 		int indexToRemove = msg.getPosition();
-		multiValue.getValues().remove(indexToRemove);
+		if(multiValue != null){
+			EList<Value> values = multiValue.getValues();
+			if(values != null && values.size() > indexToRemove){
+				values.remove(indexToRemove);
+			}
+		}
 	}
 
 	protected void removeManyListValues(Feature factoryFeature, final Notification msg, Resource resource) {
