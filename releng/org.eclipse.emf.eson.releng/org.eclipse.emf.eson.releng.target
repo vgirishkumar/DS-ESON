@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
-<target name="Generated from ESON Target Platform - Xtext 2.8.4" sequenceNumber="19">
+<target name="Generated from ESON Target Platform - Xtext 2.8.4" sequenceNumber="20">
   <locations>
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit">
       <unit id="org.eclipse.xtext.sdk.feature.group" version="2.8.4.v201508050135"/>
@@ -27,8 +27,8 @@
       <repository location="http://download.eclipse.org/modeling/emf/compare/updates/releases/3.1/R201506080833/"/>
     </location>
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit">
-      <unit id="org.eclipse.draw2d" version="3.9.0.201308190730"/>
-      <repository location="http://download.eclipse.org/tools/gef/updates/releases/3.9.1_gef-maintenance_433/"/>
+      <unit id="org.eclipse.draw2d" version="3.10.100.201606061308"/>
+      <repository location="http://download.eclipse.org/tools/gef/updates/legacy/releases/"/>
     </location>
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit">
       <unit id="org.eclipse.equinox.executable.feature.group" version="3.6.102.v20150204-1316"/>
