@@ -148,7 +148,7 @@
             nature="org.eclipse.pde.PluginNature"/>
         <operand
             xsi:type="workingsets:ExclusionPredicate"
-            excludedWorkingSet="//@setupTasks.11/@workingSets.2"/>
+            excludedWorkingSet="//@setupTasks.12/@workingSets.2"/>
       </predicate>
     </workingSet>
     <workingSet
@@ -161,9 +161,6 @@
         <operand
             xsi:type="predicates:NaturePredicate"
             nature="org.eclipse.pde.FeatureNature"/>
-        <operand
-            xsi:type="workingsets:ExclusionPredicate"
-            excludedWorkingSet="//@setupTasks.11/@workingSets.2"/>
       </predicate>
     </workingSet>
     <workingSet
@@ -187,7 +184,7 @@
             project="eson"/>
         <operand
             xsi:type="workingsets:ExclusionPredicate"
-            excludedWorkingSet="//@setupTasks.11/@workingSets.0 //@setupTasks.11/@workingSets.1 //@setupTasks.11/@workingSets.2"/>
+            excludedWorkingSet="//@setupTasks.12/@workingSets.2 //@setupTasks.12/@workingSets.0 //@setupTasks.12/@workingSets.1"/>
       </predicate>
     </workingSet>
   </setupTask>
@@ -248,7 +245,7 @@
           <repository
               url="http://download.eclipse.org/modeling/emf/compare/updates/releases/3.1/R201506080833/"/>
           <repository
-              url="http://download.eclipse.org/tools/gef/updates/releases/3.9.1_gef-maintenance_433/"/>
+              url="http://download.eclipse.org/tools/gef/updates/legacy/releases/"/>
         </repositoryList>
         <repositoryList
             name="Mars">
@@ -257,7 +254,7 @@
           <repository
               url="http://download.eclipse.org/modeling/emf/compare/updates/releases/3.1/R201506080833/"/>
           <repository
-              url="http://download.eclipse.org/tools/gef/updates/releases/3.9.1_gef-maintenance_433/"/>
+              url="http://download.eclipse.org/tools/gef/updates/legacy/releases/"/>
         </repositoryList>
       </targlet>
     </setupTask>
@@ -345,7 +342,7 @@
           <repository
               url="http://download.eclipse.org/modeling/emf/compare/updates/releases/3.1/R201506080833/"/>
           <repository
-              url="http://download.eclipse.org/tools/gef/updates/releases/3.9.1_gef-maintenance_433/"/>
+              url="http://download.eclipse.org/tools/gef/updates/legacy/releases/"/>
         </repositoryList>
         <repositoryList
             name="Mars">
@@ -360,7 +357,7 @@
           <repository
               url="http://download.eclipse.org/modeling/emf/compare/updates/releases/3.1/R201506080833/"/>
           <repository
-              url="http://download.eclipse.org/tools/gef/updates/releases/3.9.1_gef-maintenance_433/"/>
+              url="http://download.eclipse.org/tools/gef/updates/legacy/releases/"/>
         </repositoryList>
       </targlet>
     </setupTask>
