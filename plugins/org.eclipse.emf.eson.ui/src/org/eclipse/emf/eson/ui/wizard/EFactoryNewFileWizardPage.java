@@ -26,7 +26,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.eson.ui.EFactoryLog;
 import org.eclipse.emf.eson.ui.internal.EFactoryActivator;
 import org.eclipse.emf.eson.util.EPackageRegistry;
+import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IPackageFragment;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -134,11 +136,11 @@ public class EFactoryNewFileWizardPage extends WizardPage {
 			Object obj = ssel.getFirstElement();
 			if (obj instanceof IResource) {
 				setContainerText((IResource) obj);
-			} else if (obj instanceof IPackageFragment) {
-				IPackageFragment packageFragment = (IPackageFragment) obj;
+			} else if (obj instanceof IPackageFragment || obj instanceof IPackageFragmentRoot) {
+				IJavaElement packageFragment = (IJavaElement) obj;
 				try {
 					setContainerText(packageFragment.getCorrespondingResource());
-				} catch (JavaModelException e) {
+				} catch (JavaModelException  e) {
 					EFactoryLog.logError(e);
 				}
 			}
